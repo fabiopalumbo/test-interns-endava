@@ -1,10 +1,10 @@
-resource "aws_s3_bucket" "my-bucket" {
+resource "aws_s3_bucket" "b" {
   bucket    = "${local.name}-bucket"
   acl       = "private"
 }
 
 resource "aws_s3_bucket_object" "file_upload" {
-    bucket  = "my-bucket"
+    bucket  = aws_s3_bucket.b.id
     source  = "${path.module}/text.txt"
     key     = "text.txt"
 }
