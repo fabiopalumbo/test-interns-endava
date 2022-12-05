@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "my-bucket" {
   bucket    = "${local.name}-bucket"
+  acl       = "private"
 }
 
 resource "aws_s3_bucket_object" "file_upload" {
