@@ -4,7 +4,7 @@ resource "aws_s3_bucket" "b" {
 }
 
 resource "aws_s3_bucket_object" "file_upload" {
-    bucket  = var.s3_bucket
+    bucket  = aws_s3_bucket.b.id
     source  = "${path.module}/text.txt"
     key     = "text.txt"
 }

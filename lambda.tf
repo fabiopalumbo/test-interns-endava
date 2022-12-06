@@ -1,13 +1,25 @@
-resource "aws_lambda_function" "HelloWorld" {
-    function_name = "${var.name}-lambda"
+resource "aws_lambda_function" "HelloWorldLambda" {
+    function_name = "mnl-endava-lambda"
 
-    s3_bucket = var.s3_bucket
+    s3_bucket = aws_s3_bucket.b.id
     
-    s3_key = var.s3_content
+    s3_key = aws_s3_bucket_object.file_upload.id
 
-    handler = "hello.handler"
+    handler = "py.handler"
 
     runtime = "python3.8"
 
-    
+    role = aws_iam_role.lambda_role.arn
+
+}
+
+resource "aws_lambda_permission" "apigw" {
+   statement_id  = "AllowAPIGatewayInvoke"
+   action        = "lambda:InvokeFunction"
+   function_name = aws_lambda_function.HelloWorldLambda.function_name
+   principal     = "apigateway.amazonaws.com"
+
+   # The "/*/*" portion grants access from any method on any resource
+   # within the API Gateway REST API.
+   source_arn = "${aws_api_gateway_rest_api.apiLambda.execution_arn}/*/*"
 }
