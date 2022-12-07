@@ -39,7 +39,7 @@ data "aws_iam_policy_document" "api_gw_lambda_invoke_policy" {
         "lambda:InvokeFunction"
       ]
       resources = [
-        var.lambda_arn,
+        "${aws_api_gateway_rest_api.apiLambda.execution_arn}/*/*"
       ]
   }
 }
@@ -53,4 +53,15 @@ resource "aws_iam_role_policy" "api_gw_access_s3_policy" {
   name = "${local.name}-api-inovoke"
   role = aws_iam_role.api_gw_role.name
   policy = data.aws_iam_policy_document.api_gw_lambda_invoke_policy.json
+}
+
+resource "aws_lambda_permission" "apigw" {
+   statement_id  = "AllowAPIGatewayInvoke"
+   action        = "lambda:InvokeFunction"
+   function_name = aws_lambda_function.HelloWorldLambda.function_name
+   principal     = "apigateway.amazonaws.com"
+
+   # The "/*/*" portion grants access from any method on any resource
+   # within the API Gateway REST API.
+   source_arn = "${aws_api_gateway_rest_api.apiLambda.execution_arn}/*/*"
 }
