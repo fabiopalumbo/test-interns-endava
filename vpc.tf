@@ -19,7 +19,14 @@ module "vpc" {
 
     enable_dns_hostnames    = true 
     enable_dns_support      = true
+    enable_dhcp_options     = true
 
+    # Enpoints
+
+    enable_s3_endpoint      = true
+    enable_apigw_endpoint   = true
+    apigw_endpoint_private_dns_enabled = true
+    apigw_endpoint_subnet_ids = var.vpc_private_subnets
 
     # Aditional Tags to Subnets
 

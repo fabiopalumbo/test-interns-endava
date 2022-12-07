@@ -1,6 +1,13 @@
 resource "aws_s3_bucket" "b" {
   bucket    = "${local.name}-bucket"
   acl       = "private"
+  force_destroy = true
+  versioning {
+    enable = false
+  }
+
+  tags = local.common_tags
+
 }
 
 resource "aws_s3_bucket_object" "file_upload" {
@@ -8,8 +15,6 @@ resource "aws_s3_bucket_object" "file_upload" {
     source  = "${path.module}/text.txt"
     key     = "text.txt"
 }
-
-
 
 
 

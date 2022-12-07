@@ -9,5 +9,6 @@ output "s3_bucket_region" {
 }
 
 output "base_url" {
+  description = "Deployment invoke url"
   value = aws_api_gateway_deployment.apideploy.invoke_url
 }
