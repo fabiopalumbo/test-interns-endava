@@ -39,7 +39,7 @@ data "aws_iam_policy_document" "api_gw_lambda_invoke_policy" {
         "lambda:InvokeFunction"
       ]
       resources = [
-        "${aws_api_gateway_rest_api.apiLambda.execution_arn}/*/*"
+        "${aws_api_gateway_rest_api.ApiGW.execution_arn}/*/*"
       ]
   }
 }
@@ -63,5 +63,5 @@ resource "aws_lambda_permission" "apigw" {
 
    # The "/*/*" portion grants access from any method on any resource
    # within the API Gateway REST API.
-   source_arn = "${aws_api_gateway_rest_api.apiLambda.execution_arn}/*/*"
+   source_arn = "${aws_api_gateway_rest_api.ApiGW.execution_arn}/*/*"
 }

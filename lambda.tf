@@ -9,7 +9,9 @@ resource "aws_lambda_function" "HelloWorldLambda" {
 
     runtime = "python3.8"
 
-    source_path = "${path.module}/py.py"
+    # source_path = "${path.module}/py.zip"
+
+    # source_path = "./py.py"
 
     role = aws_iam_role.lambda_role.arn
 }

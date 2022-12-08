@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "b" {
   acl       = "private"
   force_destroy = true
   versioning {
-    enable = false
+    enabled = false
   }
 
   tags = local.common_tags

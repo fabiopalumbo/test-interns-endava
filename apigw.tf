@@ -1,6 +1,6 @@
 resource "aws_api_gateway_rest_api" "ApiGW" {
-   name        = "${var.name}-APIGW"
-   description = "${var.name} Endpoint"
+   name        = "${local.name}-APIGW"
+   description = "${local.name} Endpoint"
    tags = local.common_tags
 }
 
@@ -27,11 +27,18 @@ resource "aws_api_gateway_integration" "lambda" {
    uri = aws_lambda_function.HelloWorldLambda.invoke_arn
 }
 
+resource "aws_api_gateway_method_response" "lambdamethod" {
+  rest_api_id = aws_api_gateway_rest_api.ApiGW.id
+  resource_id = aws_api_gateway_resource.proxy.id
+  http_method = aws_api_gateway_method.proxyMethod.http_method
+  status_code = "200"
+}
+
 resource "aws_api_gateway_integration_response" "lambdaReponse" {
   rest_api_id = aws_api_gateway_rest_api.ApiGW.id
   resource_id = aws_api_gateway_resource.proxy.id
   http_method = aws_api_gateway_method.proxyMethod.http_method
-  status_code = aws_api_gateway_method_response.lambdaReponse.status_code
+  status_code = aws_api_gateway_method_response.lambdamethod.status_code
   depends_on = [ aws_api_gateway_integration.lambda ]
 }
 
@@ -63,7 +70,7 @@ resource "aws_api_gateway_usage_plan" "apiplan" {
 
   api_stages {
     api_id = aws_api_gateway_rest_api.ApiGW.id
-    stage = aws_api_gateway_stage.apistage
+    stage = aws_api_gateway_stage.apistage.id
   } 
 }
 
@@ -73,6 +80,6 @@ resource "aws_api_gateway_api_key" "apikey" {
 
 resource "aws_api_gateway_usage_plan_key" "apikeyplan" {
    key_id = aws_api_gateway_api_key.apikey.id
-   key_key_type = "API_KEY"
+   key_type = "API_KEY"
    usage_plan_id = aws_api_gateway_usage_plan.apiplan.id   
 }
