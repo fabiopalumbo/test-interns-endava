@@ -23,10 +23,10 @@ module "vpc" {
 
     # Enpoints
 
-    enable_s3_endpoint      = true
-    enable_apigw_endpoint   = true
-    apigw_endpoint_private_dns_enabled = true
-    apigw_endpoint_subnet_ids = var.vpc_private_subnets
+    # enable_s3_endpoint      = true
+    # enable_apigw_endpoint   = true
+    # apigw_endpoint_private_dns_enabled = true
+    # apigw_endpoint_subnet_ids = var.vpc_private_subnets
 
     # Aditional Tags to Subnets
 
