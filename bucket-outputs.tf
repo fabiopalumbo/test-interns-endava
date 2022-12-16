@@ -1,10 +1,12 @@
 output "s3_bucket_id" {
     description = "The name of the bucket"
-    value = var.s3_bucket
+    value = aws_s3_bucket.b.id
 }
 
 output "s3_bucket_region" {
     description = "The AWS region this bucket resides in."
-    value = var.s3_region
+    value = aws_s3_bucket.b.region
 }
+
+
 
