@@ -77,30 +77,3 @@ resource "aws_api_gateway_usage_plan_key" "my_plan_key" {
     key_type = "API_KEY"
     usage_plan_id = aws_api_gateway_usage_plan.my_usageplan.id
 }
-
-# resource "aws_apigatewayv2_api" "api_gateway" {
-#     name = "example_api"
-#     protocol_type = "HTTP"
-#     #target = aws_lambda_function.HelloWorldLambda.arn
-#     #target_lambda_arn = aws_lambda_function.HelloWorldLambda.arn
-# }
-
-# resource "aws_apigatewayv2_stage" "production" {
-#     api_id = aws_apigatewayv2_api.api_gateway.id
-#     name = "production"
-#     auto_deploy = true
-# }
-
-# resource "aws_apigatewayv2_integration" "lambda_hello" {
-#     api_id = aws_apigatewayv2_api.api_gateway.id
-#     integration_uri = aws_lambda_function.HelloWorldLambda.invoke_arn
-#     integration_type = "AWS_PROXY"
-#     integration_method = "POST"
-# }
-
-# resource "aws_apigatewayv2_route" "get_hello" {
-#     api_id = aws_apigatewayv2_api.api_gateway.id
-#     route_key = "GET /my_resource"
-#     target = aws_apigatewayv2_integration.lambda_hello.id
-# }
-

@@ -13,6 +13,11 @@ output "apigw_invoke_url" {
   value = aws_api_gateway_stage.my_stage.invoke_url
 }
 
+output "apigw_deployment" {
+  description = "My deployment ARN"
+  value = aws_api_gateway_deployment.my_deployment.execution_arn
+}
+
 # output "apigw_api_key" {
 #   description = "API GW key value"
 #   value = aws_api_gateway_api_key.my_api.value
