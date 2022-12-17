@@ -20,3 +20,11 @@ resource "aws_s3_object" "Text" {
   key = "text.txt"
   content = "Hello World."
 }
+
+provider "archive" {}
+
+data "archive_file" "zip" {
+  type        = "zip"
+  source_file = "script.py"
+  output_path = "script.zip"
+}
