@@ -3,7 +3,7 @@ resource "aws_vpc" "vpc4096ip" {
 }
 
 resource "aws_subnet" "subnet256ip1" {
-  vpc_id = aws_vpc.vpc4096ip.owner_id
+  vpc_id = aws_vpc.vpc4096ip.id
   cidr_block = "10.0.1.0/24"
 }
 
