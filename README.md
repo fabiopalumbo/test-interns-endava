@@ -70,13 +70,13 @@ The Terraform setup is divided into several files for clarity and maintainabilit
    ```bash
    terraform init
    ```
-1. **Initialize Terraform:**
+1. **Plan Terraform:**
    ```bash
-   terraform init
+   terraform plan
    ```
-1. **Initialize Terraform:**
+1. **Apply Terraform:**
    ```bash
-   terraform init
+   terraform apply
    ```
 
 ## 🧪 Testing the Infrastructure
